@@ -5,6 +5,16 @@
 var express = require('express');
 var app = express();
 
+const getFormattedTimestamp = require('./timestamp.js').getFormattedTimestamp;
+
+function simpleRequestLogger(req, resp, next){
+  console.log(`${req.method} ${req.path} - ${req.ip} `);
+  console.log(JSON.stringify(req.body));
+  next();
+}
+
+app.use(simpleRequestLogger);
+
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
@@ -16,6 +26,10 @@ app.use(express.static('public'));
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
+});
+
+app.get("/api/timestamp/:timestamp", function(req, res) {
+	res.send(getFormattedTimestamp(req.params.timestamp))
 });
 
 
