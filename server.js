@@ -34,7 +34,7 @@ app.get("/api/timestamp", function(req, res) {
 });
 
 app.get("/api/timestamp/:timestamp", function(req, res) {
-	console.log("getting timestamp with  " + timestamp);
+	console.log("getting timestamp with  " + req.params.timestamp);
 	res.send(getFormattedTimestamp(req.params.timestamp))
 });
 
