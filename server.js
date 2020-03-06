@@ -28,7 +28,13 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/api/timestamp", function(req, res) {
+	console.log("getting timestamp with no timestmap ");
+	res.send(getFormattedTimestamp());
+});
+
 app.get("/api/timestamp/:timestamp", function(req, res) {
+	console.log("getting timestamp with  " + timestamp);
 	res.send(getFormattedTimestamp(req.params.timestamp))
 });
 
