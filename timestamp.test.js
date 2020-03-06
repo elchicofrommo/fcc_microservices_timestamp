@@ -20,13 +20,7 @@ test(`bad arg should return ${JSON.stringify(invalid)}`, () =>{
 	expect(time).toBeTruthy();
 	expect(time).toEqual(invalid);
 
-	var time = getFormattedTimestamp(1450137600);
-	expect(time).toBeTruthy();
-	expect(time).toEqual(invalid);
 
-	var time = getFormattedTimestamp("1450137600");
-	expect(time).toBeTruthy();
-	expect(time).toEqual(invalid);	
 })
 
 test(`Verify ISO-8601 compliant date strings create valid date`, ()=>{
@@ -36,6 +30,22 @@ test(`Verify ISO-8601 compliant date strings create valid date`, ()=>{
 	time = getFormattedTimestamp("October 13, 2014 11:13:00");
 	validateFormat(time);
 });
+
+test("verify number does create a date", ()=>{
+	var time = getFormattedTimestamp(1450137600);
+	validateFormat(time);
+
+	time = getFormattedTimestamp(1);
+	validateFormat(time);
+})
+
+test("verify number as a string does create a date", ()=>{
+	var time = getFormattedTimestamp("1450137600");
+	validateFormat(time);
+
+	time = getFormattedTimestamp("1");
+	validateFormat(time);
+})
 
 function validateFormat(time){
 	expect(time).toHaveProperty("unix");

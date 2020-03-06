@@ -4,8 +4,8 @@ function getFormattedTimestamp(timestamp){
 	let date = null;
 	if(!timestamp){
 		date = new Date();
-	}else if(typeof timestamp  == 'number'){
-		date = "Invalid Date";
+	}else if(!isNaN(timestamp)){
+		date = new Date(parseInt(timestamp))
 	}else{
 		date = new Date(timestamp);
 	}
